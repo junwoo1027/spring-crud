@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.company.domain.BoardVo;
 import com.company.domain.Criteria;
+import com.company.domain.ListDto;
 
 public interface BoardService {
 	
@@ -20,4 +21,6 @@ public interface BoardService {
 	public List<BoardVo> getList(Criteria cri);
 	
 	public int getTotal(Criteria cri);
+	
+	public ListDto getBoard(Criteria cri, long bno);
 }

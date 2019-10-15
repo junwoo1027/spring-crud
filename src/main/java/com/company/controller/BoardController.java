@@ -1,6 +1,9 @@
 package com.company.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,10 +36,20 @@ public class BoardController {
 	
 	//목록리스트
 	@GetMapping("/list")
-	public void list(BoardVo board, Criteria cri, Model model) {
+	public void list(Criteria cri, Model model) {
+		List<BoardVo> boards = service.getList(cri);
+		Map<Long, Object> replyMap = new HashMap<Long, Object>();
+//		ArrayList<Object> rep = new ArrayList<Object>(); 
+		
+		for(BoardVo board : boards) {
+			List<ReplyVo> replies = replyService.getList(board.getBno());
+//			rep.add(replies);
+			replyMap.put(board.getBno(), replies);
+		}
+		
 		log.info("list: " + cri);
-		model.addAttribute("list", service.getList(cri));
-		model.addAttribute("reply", replyService.getList(48L));
+		model.addAttribute("reply", replyMap);
+		model.addAttribute("list", boards);
 		int total = service.getTotal(cri);
 		log.info("total: " + total);
 		model.addAttribute("pageMaker", new PageDto(cri, total));

@@ -14,4 +14,6 @@ public class BoardVo {
 	private Date updateDate;
 	private int fix;
 	private int replyCnt;
+	private String replyer;
+	private String reply;
 }

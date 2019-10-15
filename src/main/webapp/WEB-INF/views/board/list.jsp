@@ -40,21 +40,14 @@
      										
      										<td><a class='move' href='<c:out value="${board.bno}"/>'>
      										<c:out value="${board.title}"/></a>
-     										<c:if test="${board.replyCnt > 0}">
+											<c:if test="${board.replyCnt > 0}">
      										<b>[<c:out value="${board.replyCnt}"/>]</b>
      										</c:if>
-    											<table>
-    											<c:forEach items="${reply}" var="list">
-    												<tr>
-   														<td>작성자 : </td>
-   														<td>${list.replyer}</td>
-    												</tr>
-    												<tr>
-														<td>내용 : </td>
-														<td>${list.reply}</td>    												
-    												</tr>
+    											<c:forEach items="${reply}" var="reply">
+    											<c:if test="${board.bno == reply.key && not empty reply}">			
+													${reply.get(board.bno)}
+												</c:if>
     											</c:forEach>
-    											</table>
      										</td>
      										<td><c:out value="${board.writer}"/></td>
      										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate}"/></td>
@@ -69,18 +62,11 @@
      										<c:if test="${board.replyCnt > 0}">
      										<b>[<c:out value="${board.replyCnt}"/>]</b>
      										</c:if>
-     											<table>
-    											<c:forEach items="${reply}" var="list">
-    												<tr>
-   														<td>작성자 : </td>
-   														<td>${list.replyer}</td>
-    												</tr>
-    												<tr>
-														<td>내용 : </td>
-														<td>${list.reply}</td>    												
-    												</tr>
+     									    	<c:forEach items="${reply}" var="reply">
+    											<c:if test="${board.bno == reply.key}">			
+													${reply}
+												</c:if>
     											</c:forEach>
-    											</table>
      										</td>
      										<td bgcolor="yellow"><c:out value="${board.writer}"/></td>
      										<td bgcolor="yellow"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate}"/></td>

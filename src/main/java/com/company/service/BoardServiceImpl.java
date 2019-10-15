@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 
 import com.company.domain.BoardVo;
 import com.company.domain.Criteria;
+import com.company.domain.ListDto;
 import com.company.mapper.BoardMapper;
+import com.company.mapper.ReplyMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -17,6 +19,7 @@ import lombok.extern.log4j.Log4j;
 public class BoardServiceImpl implements BoardService{
 
 	private BoardMapper mapper;
+	private ReplyMapper replyMapper;
 	
 	@Override
 	public void register(BoardVo board) {
@@ -49,5 +52,8 @@ public class BoardServiceImpl implements BoardService{
 		return mapper.getTotalCount(cri);
 	}
 
-	
+	@Override
+	public ListDto getBoard(Criteria cri, long bno) {
+		return new ListDto(mapper.getListWithPaging(cri), replyMapper.getList(bno));
+	}
 }
