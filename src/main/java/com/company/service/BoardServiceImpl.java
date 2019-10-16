@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.company.domain.BoardVo;
 import com.company.domain.Criteria;
-import com.company.domain.ListDto;
 import com.company.mapper.BoardMapper;
 import com.company.mapper.ReplyMapper;
 
@@ -50,10 +49,5 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int getTotal(Criteria cri) {
 		return mapper.getTotalCount(cri);
-	}
-
-	@Override
-	public ListDto getBoard(Criteria cri, long bno) {
-		return new ListDto(mapper.getListWithPaging(cri), replyMapper.getList(bno));
 	}
 }

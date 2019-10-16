@@ -4,7 +4,7 @@ import java.util.Date;
 
 import lombok.Data;
 
-@Data
+
 public class ReplyVo {
 
 	private Long rno;
@@ -13,4 +13,49 @@ public class ReplyVo {
 	private String replyer;
 	private Date replyDate;
 	private Date updateDate;
+	
+	public Long getRno() {
+		return rno;
+	}
+	public void setRno(Long rno) {
+		this.rno = rno;
+	}
+	public Long getBno() {
+		return bno;
+	}
+	public void setBno(Long bno) {
+		this.bno = bno;
+	}
+	public String getReply() {
+		return reply;
+	}
+	public void setReply(String reply) {
+		this.reply = reply;
+	}
+	public String getReplyer() {
+		return replyer;
+	}
+	public void setReplyer(String replyer) {
+		this.replyer = replyer;
+	}
+	public Date getReplyDate() {
+		return replyDate;
+	}
+	public void setReplyDate(Date replyDate) {
+		this.replyDate = replyDate;
+	}
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+	
+	@Override
+	public String toString() {
+		return "ReplyVo [rno=" + rno + ", bno=" + bno + ", reply=" + reply + ", replyer=" + replyer + ", replyDate="
+				+ replyDate + ", updateDate=" + updateDate + "]";
+	}
+	
+	
 }

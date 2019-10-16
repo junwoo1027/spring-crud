@@ -2,7 +2,7 @@ package com.company.domain;
 
 import lombok.Data;
 
-@Data
+
 public class Criteria {
 
 	private int pageNum;
@@ -20,5 +20,22 @@ public class Criteria {
 	public int getPageStart() {
 		return (this.pageNum -1) * amount;
 	}
+
+	public int getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
 	
 }

@@ -44,11 +44,15 @@ public class BoardController {
 		for(BoardVo board : boards) {
 			List<ReplyVo> replies = replyService.getList(board.getBno());
 //			rep.add(replies);
+//			System.out.println(replies);
 			replyMap.put(board.getBno(), replies);
 		}
 		
+		
+//		List<Map> list = (List<Map>) replyMap.get(24L);
+//		model.addAttribute("li", list);
 		log.info("list: " + cri);
-		model.addAttribute("reply", replyMap);
+		model.addAttribute("replyList", replyMap);
 		model.addAttribute("list", boards);
 		int total = service.getTotal(cri);
 		log.info("total: " + total);

@@ -91,8 +91,8 @@ public class BoardServiceTest {
 //		log.info(service.getClass().getName());
 //	}
 
-	@Test
-	public void testGet() {
-		log.info(service.get(110L));
-	}
+//	@Test
+//	public void testGet() {
+//		log.info(service.get(110L));
+//	}
 }

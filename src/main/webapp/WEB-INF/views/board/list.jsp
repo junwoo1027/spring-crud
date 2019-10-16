@@ -43,10 +43,15 @@
 											<c:if test="${board.replyCnt > 0}">
      										<b>[<c:out value="${board.replyCnt}"/>]</b>
      										</c:if>
-    											<c:forEach items="${reply}" var="reply">
-    											<c:if test="${board.bno == reply.key && not empty reply}">			
-													${reply.get(board.bno)}
-												</c:if>
+    											<c:forEach items="${replyList}" var="replies">
+    												<c:forEach items="${replies.value}" var ="rep">
+    													<c:if test="${board.bno == replies.key}">			
+														<br>
+														<div class="fa fa-comments fa-fw"></div>
+														<p>작성자 : ${rep.getReply()}
+														내용 : ${rep.getReplyer()}</p>
+													</c:if>
+													</c:forEach>
     											</c:forEach>
      										</td>
      										<td><c:out value="${board.writer}"/></td>
@@ -62,10 +67,15 @@
      										<c:if test="${board.replyCnt > 0}">
      										<b>[<c:out value="${board.replyCnt}"/>]</b>
      										</c:if>
-     									    	<c:forEach items="${reply}" var="reply">
-    											<c:if test="${board.bno == reply.key}">			
-													${reply}
-												</c:if>
+     									    	<c:forEach items="${replyList}" var="replies">
+    												<c:forEach items="${replies.value}" var ="rep">
+    													<c:if test="${board.bno == replies.key}">			
+														<br>
+														<div class="fa fa-comments fa-fw"></div>
+														<p>작성자 : ${rep.getReply()}
+														내용 : ${rep.getReplyer()}</p>
+														</c:if>
+													</c:forEach>
     											</c:forEach>
      										</td>
      										<td bgcolor="yellow"><c:out value="${board.writer}"/></td>
