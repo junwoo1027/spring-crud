@@ -57,13 +57,6 @@ public class ReplyServiceImpl implements ReplyService {
 		return mapper.delete(rno);
 	}
 
-//	@Override
-//	public List<ReplyVo> getList(Criteria cri, Long bno) {
-//		log.info("get Reply List of a Board " + bno);
-//		return mapper.getListWithPaging(cri, bno);
-//	}
-
-	
 	@Override
 	public List<ReplyVo> getList(Long bno) {
 		log.info("get Reply List of a Board " + bno);

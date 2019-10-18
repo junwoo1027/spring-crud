@@ -31,6 +31,7 @@ select * from board where bno > 0
 
 <delete id="delete">
 	delete from board where bno = #{bno}
+	delete from reply where rno = #{rno}
 </delete>
 
 <update id="update">

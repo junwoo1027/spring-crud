@@ -1,6 +1,5 @@
 package com.company.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +30,6 @@ import lombok.extern.log4j.Log4j;
 public class BoardController {
 
 	private BoardService service;
-	
 	private ReplyService replyService;
 	
 	//목록리스트
@@ -39,18 +37,12 @@ public class BoardController {
 	public void list(Criteria cri, Model model) {
 		List<BoardVo> boards = service.getList(cri);
 		Map<Long, Object> replyMap = new HashMap<Long, Object>();
-//		ArrayList<Object> rep = new ArrayList<Object>(); 
 		
 		for(BoardVo board : boards) {
 			List<ReplyVo> replies = replyService.getList(board.getBno());
-//			rep.add(replies);
-//			System.out.println(replies);
 			replyMap.put(board.getBno(), replies);
 		}
 		
-		
-//		List<Map> list = (List<Map>) replyMap.get(24L);
-//		model.addAttribute("li", list);
 		log.info("list: " + cri);
 		model.addAttribute("replyList", replyMap);
 		model.addAttribute("list", boards);
@@ -67,7 +59,7 @@ public class BoardController {
 	
 	//글  등록 처리
 	@PostMapping("register")
-	public String register(BoardVo board, RedirectAttributes rttr) {
+	public String register(BoardVo board, RedirectAttributes rttr) { //RedirectAttributes : d
 		service.register(board);
 		rttr.addFlashAttribute("result", board.getBno());
 		rttr.addFlashAttribute("fix", board.getFix());

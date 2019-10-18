@@ -1,12 +1,10 @@
 package com.company.domain;
 
-import lombok.Data;
-
 
 public class Criteria {
 
-	private int pageNum;
-	private int amount;
+	private int pageNum;//게시글 페이지 번호
+	private int amount;//한 페이지에 보여줄 게시글 갯수
 	
 	public Criteria(int pageNum, int amount) {
 		this.pageNum = pageNum;
