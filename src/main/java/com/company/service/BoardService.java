@@ -19,4 +19,10 @@ public interface BoardService {
 	
 	public int getTotal(Criteria cri);
 	
+	public BoardVo getBoardReplyInfo(Long bno);
+	
+	public void updateGroupOrd(BoardVo board);
+	
+	public void insertBoardReply(BoardVo board);
+	
 }

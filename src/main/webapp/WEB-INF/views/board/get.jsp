@@ -35,6 +35,7 @@
                 
                 <button data-oper='modify' class="btn btn-default">Modify</button>
                 <button data-oper='list' class="btn btn-default">List</button>
+                <button data-oper='boardReply' class="btn btn-default">답글</button>
                 
                 <form id='operForm' action="/board/modify" method="get">
                 	<input type="hidden" id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
@@ -396,6 +397,11 @@ $(document)
 				operForm.find("#bno").remove();
 				operForm.attr("action", "/board/list")
 				operForm.submit();
+			});
+			
+			$("button[data-oper='boardReply']").on("click", function(e){
+				operForm.attr("action", "/board/boardReply")
+				.submit();
 			});
 		});
 </script>

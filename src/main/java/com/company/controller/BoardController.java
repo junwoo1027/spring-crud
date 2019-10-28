@@ -36,15 +36,16 @@ public class BoardController {
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
 		List<BoardVo> boards = service.getList(cri);
-		Map<Long, Object> replyMap = new HashMap<Long, Object>();
+//		Map<Long, Object> replyMap = new HashMap<Long, Object>();
+//		
+//		for(BoardVo board : boards) {
+//			List<ReplyVo> replies = replyService.getList(board.getBno());
+//			replyMap.put(board.getBno(), replies);
+//		}
 		
-		for(BoardVo board : boards) {
-			List<ReplyVo> replies = replyService.getList(board.getBno());
-			replyMap.put(board.getBno(), replies);
-		}
-		
+		System.out.println(boards);
 		log.info("list: " + cri);
-		model.addAttribute("replyList", replyMap);
+//		model.addAttribute("replyList", replyMap);
 		model.addAttribute("list", boards);
 		int total = service.getTotal(cri);
 		log.info("total: " + total);
@@ -97,6 +98,24 @@ public class BoardController {
 		
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
+		
+		return "redirect:/board/list";
+	}
+	
+	//답글 등록페이지 이동
+	@GetMapping("/boardReply")
+	public void boardReply(@RequestParam("bno") Long bno, Model model) {
+	
+		System.out.println(service.getBoardReplyInfo(bno));
+		model.addAttribute("boardReply", service.getBoardReplyInfo(bno));
+	}
+	
+	//답글 등록 처리
+	@PostMapping("boardReply")
+	public String boardReply(BoardVo board, RedirectAttributes rttr) {
+		service.updateGroupOrd(board);
+		service.insertBoardReply(board);
+		rttr.addFlashAttribute("result", "success");
 		
 		return "redirect:/board/list";
 	}

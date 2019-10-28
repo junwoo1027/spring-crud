@@ -11,17 +11,23 @@ select * from board where bno > 0
 
 </select>
 
-<insert id="insert" useGeneratedKeys="true" keyProperty="bno">
-	insert into board(title,content,writer, fix)
-	values (#{title}, #{content}, #{writer}, #{fix})
+<insert id="insert">
+
+	<selectKey resultType="long" keyProperty="bno" order="BEFORE">
+		select ifnull(max(bno), 0) + 1 from board;
+	</selectKey>
+	
+	insert into board(title,content,writer, fix, groupNo, groupOrd, depth)
+	values (#{title}, #{content}, #{writer}, #{fix}, #{bno}, 0 , 0)
 </insert>
+
 
 <select id="getListWithPaging" resultType="com.company.domain.BoardVo">
 		select
-			bno, title, content, writer, regdate, updatedate, fix, replyCnt
+			bno, title, content, writer, regdate, updatedate, fix, replyCnt, groupNo, groupOrd, depth
 		from board
 		where bno > 0
-		order by fix desc, bno desc
+		order by groupNo desc, groupOrd asc
 		limit #{pageStart}, #{amount}
 </select>
 
@@ -31,7 +37,6 @@ select * from board where bno > 0
 
 <delete id="delete">
 	delete from board where bno = #{bno}
-	delete from reply where rno = #{rno}
 </delete>
 
 <update id="update">
@@ -50,4 +55,40 @@ select * from board where bno > 0
 <update id="updateReplyCnt">
 	update board set replyCnt = replyCnt + #{amount} where bno = #{bno}
 </update>
+
+<select id="getBoardReplyInfo" resultType="com.company.domain.BoardVo">
+	select bno, groupNo, groupOrd, depth
+	from board
+	where bno = #{bno}
+</select>
+
+<delete id="updateGroupOrd" parameterType="com.company.domain.BoardVo">
+	Update board
+	set groupOrd = groupOrd + 1
+	where groupNo = #{groupNo}
+	and groupOrd > #{groupOrd}
+</delete>
+
+<insert id="insertBoardReply" parameterType="com.company.domain.BoardVo">
+	insert board
+	(
+		groupNo,
+		groupOrd,
+		depth,
+		title,
+		content,
+		writer
+	)
+	
+	values
+	(
+		#{groupNo},
+		#{groupOrd} + 1,
+		#{depth} + 1,
+		#{title},
+		#{content},
+		#{writer}
+	)
+</insert>
+
 </mapper>

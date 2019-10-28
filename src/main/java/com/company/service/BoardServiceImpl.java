@@ -50,4 +50,19 @@ public class BoardServiceImpl implements BoardService{
 	public int getTotal(Criteria cri) {
 		return mapper.getTotalCount(cri);
 	}
+
+	@Override
+	public BoardVo getBoardReplyInfo(Long bno) {
+		return mapper.getBoardReplyInfo(bno);
+	}
+
+	@Override
+	public void updateGroupOrd(BoardVo board) {
+		mapper.updateGroupOrd(board);
+	}
+
+	@Override
+	public void insertBoardReply(BoardVo board) {
+		mapper.insertBoardReply(board);
+	}
 }

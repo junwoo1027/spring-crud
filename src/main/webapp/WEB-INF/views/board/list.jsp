@@ -38,22 +38,33 @@
      										<c:if test="${board.fix == 0}">
      										<td class='fix'><c:out value="${board.bno}"/></td>
      										
-     										<td><a class='move' href='<c:out value="${board.bno}"/>'>
+     										
+     										<td>
+     										<c:if test="${board.depth > 0}">
+     											<c:forEach begin="1" end="${board.depth}">
+     												&nbsp;&nbsp;&nbsp;
+     											</c:forEach>
+     											Re:
+     										</c:if>
+     										<a class='move' href='<c:out value="${board.bno}"/>'>
      										<c:out value="${board.title}"/></a>
 											<c:if test="${board.replyCnt > 0}">
      										<b>[<c:out value="${board.replyCnt}"/>]</b>
      										</c:if>
-    											<c:forEach items="${replyList}" var="replies">
-    												<c:forEach items="${replies.value}" var ="rep">
+     											<c:forEach items="${replyList}" var="replies">
+ <%--   												<c:forEach items="${replies.value}" var ="rep">
     													<c:if test="${board.bno == replies.key}">			
 														<br>
 														<div class="fa fa-comments fa-fw"></div>
 														<p>작성자 : ${rep.getReply()}
 														내용 : ${rep.getReplyer()}</p>
 													</c:if>
-													</c:forEach>
+													</c:forEach>--%>
     											</c:forEach>
      										</td>
+     										
+
+     										
      										<td><c:out value="${board.writer}"/></td>
      										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate}"/></td>
      										<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.updateDate}"/></td>
@@ -68,14 +79,14 @@
      										<b>[<c:out value="${board.replyCnt}"/>]</b>
      										</c:if>
      									    	<c:forEach items="${replyList}" var="replies">
-    												<c:forEach items="${replies.value}" var ="rep">
+   <%--  												<c:forEach items="${replies.value}" var ="rep">
     													<c:if test="${board.bno == replies.key}">			
 														<br>
 														<div class="fa fa-comments fa-fw"></div>
 														<p>작성자 : ${rep.getReply()}
 														내용 : ${rep.getReplyer()}</p>
 														</c:if>
-													</c:forEach>
+													</c:forEach> --%>
     											</c:forEach>
      										</td>
      										<td bgcolor="yellow"><c:out value="${board.writer}"/></td>
@@ -119,7 +130,6 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
                                         </div>
                                     </div>
                             </div>

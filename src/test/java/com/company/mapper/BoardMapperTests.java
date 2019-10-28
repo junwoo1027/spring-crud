@@ -28,24 +28,30 @@ public class BoardMapperTests {
 //		mapper.getList().forEach(board -> log.info(board));
 //	}
 	
-	@Test
-	public void testInsert() {
-		BoardVo board = new BoardVo();
-		board.setTitle("새글");
-		board.setContent("새 글 내용");
-		board.setWriter("newbie");
-		board.setFix(1);
-		mapper.insert(board);
-		
-		log.info(board);
-	}
-	
 //	@Test
-//	public void testRead() {
-//		BoardVo board = mapper.read(22L);
+//	public void testInsert() {
+//		BoardVo board = new BoardVo();
+//		board.setTitle("2글");
+//		board.setContent("2 글 내용");
+//		board.setWriter("newbie");
+//		mapper.insert(board);
 //		
 //		log.info(board);
 //	}
+	
+//	@Test
+//	public void read() {
+//		
+//		BoardVo board = new BoardVo();
+//		board.setBno(9L);
+//		board.setTitle("T");
+//		board.setContent("C");
+//		board.setWriter("W");
+//		
+//		log.info(board);
+//		
+//	}
+	
 	
 //	@Test
 //	public void testDelete() {
@@ -65,13 +71,49 @@ public class BoardMapperTests {
 //		log.info("update count: " + count);
 //	}
 	
+//	@Test
+//	public void tesPaging() {
+//		Criteria cri = new Criteria();
+//		
+//		cri.setPageNum(1);
+//		cri.setAmount(10);
+//		List<BoardVo> list = mapper.getListWithPaging(cri);
+//		list.forEach(board -> log.info(board));
+//	}
+	
+	//부모글 그룹번호, 그룹순서, 깊이 조회
+//	@Test
+//	public void test() {
+//		BoardVo board = new BoardVo();
+//		
+//		mapper.getBoardReplyInfo(9L);
+//		
+//	}
+	
+	//답글 순서 변경 테스트
+//	@Test
+//	public void boardOrd() {
+//		BoardVo board = new BoardVo();
+//		
+//		board.setGroupNo(9);
+//		
+//		mapper.updateGroupOrd(board);
+//		
+//		log.info(board);
+//	}
+	
+	//답글 등록 테스트
 	@Test
-	public void tesPaging() {
-		Criteria cri = new Criteria();
+	public void BoadReply() {
+		BoardVo board = mapper.getBoardReplyInfo(24L);
 		
-		cri.setPageNum(1);
-		cri.setAmount(10);
-		List<BoardVo> list = mapper.getListWithPaging(cri);
-		list.forEach(board -> log.info(board));
+		board.setTitle("앵");
+		board.setContent("reply");
+		board.setWriter("jun");
+		
+		mapper.updateGroupOrd(board);
+		mapper.insertBoardReply(board);
+		
+		log.info(board);
 	}
 }

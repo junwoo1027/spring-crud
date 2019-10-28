@@ -26,4 +26,10 @@ public interface BoardMapper {
 	public int getTotalCount(Criteria cri);
 	
 	public void updateReplyCnt(@Param("bno") long bno, @Param("amount") int amount);
+	
+	public BoardVo getBoardReplyInfo(Long bno);
+	
+	public void updateGroupOrd(BoardVo board);
+	
+	public void insertBoardReply(BoardVo board);
 }
