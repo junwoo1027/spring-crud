@@ -1,9 +1,11 @@
 package com.company.config;
 
 import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitializer{
@@ -27,6 +29,9 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 	protected void customizeRegistration(
 			ServletRegistration.Dynamic registration) {
 		registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
+		
+		MultipartConfigElement multipartConfig = new MultipartConfigElement("C:\\upload\\temp", 20971520, 41943040, 20971520);
+		registration.setMultipartConfig(multipartConfig);
 	}
 
 	//utf-8 필터
@@ -38,4 +43,6 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 		
 		return new Filter[] {characterEncodingFilter};
 	}
+	
+	
 }
