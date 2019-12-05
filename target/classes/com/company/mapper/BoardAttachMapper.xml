@@ -5,8 +5,8 @@
 <mapper namespace="com.company.mapper.BoardAttachMapper">
 
 	<insert id="insert">
-		insert into attach (uuid, uploadPath, filename, filetype, bno)
-		values (#{uuid}, #{uploadPath}, #{filename}, #{filetype}, #{bno})
+		insert into attach (uuid, uploadPath, fileName, image, bno)
+		values (#{uuid}, #{uploadPath}, #{fileName}, #{image}, #{bno})
 	</insert>
 	
 	<delete id="delete">
@@ -15,5 +15,14 @@
 	
 	<select id="findByBno" resultType="com.company.domain.BoardAttachVo">
 		select * from attach where bno = #{bno}
+	</select>
+	
+	<delete id="deleteAll">
+		delete from attach where bno = #{bno}
+	</delete>
+	
+	<select id="getOldFiles" resultType="com.company.domain.BoardAttachVo">
+	
+		select * from attach where uploadPath = to_char(now() -1, 'yyyy\mm\dd')
 	</select>
 </mapper>

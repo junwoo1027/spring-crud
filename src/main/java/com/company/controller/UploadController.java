@@ -83,7 +83,7 @@ public class UploadController {
 				
 				//check image type file
 				if(checkImageType(saveFile)) {
-					attachFileDto.setFileType(true);
+					attachFileDto.setImage(true);
 					
 					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
 					

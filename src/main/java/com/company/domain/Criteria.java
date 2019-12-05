@@ -1,5 +1,6 @@
 package com.company.domain;
 
+import org.springframework.web.util.UriComponentsBuilder;
 
 public class Criteria {
 
@@ -35,5 +36,13 @@ public class Criteria {
 		this.amount = amount;
 	}
 
+	public String getListLink() {
+		
+		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
+				.queryParam("pageNum", this.pageNum)
+				.queryParam("amount", this.amount);
+		
+		return builder.toUriString();
+	}
 	
 }

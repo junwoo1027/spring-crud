@@ -126,11 +126,35 @@ $(document).ready(function(e){
 	var formObj = $("form[role='form']");
 	
 	$("button[type='submit']").on("click", function(e){
-		
-		e.preventDefault();
-		
-		console.log("submit clicked");
-	});
+	    
+//	    e.preventDefault();
+	    
+	    console.log("submit clicked");
+	    
+	    var str = "";
+	    
+	    $(".uploadResult ul li").each(function(i, obj){
+	      
+	      var jobj = $(obj);
+	      
+	      console.dir(jobj);
+	      console.log("-------------------------");
+	      console.log(jobj.data("filename"));
+	      
+	      
+	      str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("filename")+"'>";
+	      str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
+	      str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data("path")+"'>";
+	      str += "<input type='hidden' name='attachList["+i+"].image' value='"+ jobj.data("type")+"'>";
+	      
+	    });
+	    
+	    console.log(str);
+	    
+	    formObj.append(str).submit();
+	    
+	  });
+
 	
 	
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
@@ -218,6 +242,27 @@ $(document).ready(function(e){
 				  showUploadResult(result);
 		    }
 		}); //$.ajax
+		
+		//첨부파일 삭제
+		$(".uploadResult").on("click", "button", function(e) {
+			console.log("delete file");
+			
+			var targetFile = $(this).data("file");
+			var type = $(this).data("type");
+			
+			var targetLi = $(this).closest("li");
+			
+			$.ajax({
+				url: '/deleteFile',
+				data: {fileName: targetFile, type:type},
+				dataType: 'text',
+				type: 'POST',
+				success: function(result) {
+					alert(result);
+					targetLi.remove();
+				}
+			});
+		})		
 	});
 });
 </script>

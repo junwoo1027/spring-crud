@@ -2,6 +2,7 @@ package com.company.service;
 
 import java.util.List;
 
+import com.company.domain.BoardAttachVo;
 import com.company.domain.BoardVo;
 import com.company.domain.Criteria;
 
@@ -24,5 +25,7 @@ public interface BoardService {
 	public void updateGroupOrd(BoardVo board);
 	
 	public void insertBoardReply(BoardVo board);
+	
+	public List<BoardAttachVo> getAttachList(Long bno);
 	
 }
