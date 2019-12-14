@@ -1,4 +1,4 @@
-## Springrhk Mybatis를 활용한 게시판
+## Spring Mybatis를 활용한 게시판
 
 ### 개발환경
 - JAVA, JSP, Spring, Mybatis, Jquery, Mysql, Bootstrap 
